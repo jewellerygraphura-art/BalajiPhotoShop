@@ -27,7 +27,9 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
-  "https://g-crown-vert.vercel.app"
+  "https://g-crown-vert.vercel.app",
+  "https://www.newbalajiphotoframeandgift.com",
+  "https://newbalajiphotoframeandgift.com"
 ];
 
 if (process.env.CLIENT_URL) {
@@ -47,7 +49,8 @@ app.use(
         return callback(null, true);
       }
 
-      return callback(new Error("Not allowed by CORS"));
+      console.error(`⚠️ CORS BLOCK: Blocked origin is: "${origin}"`);
+      return callback(new Error(`Not allowed by CORS: "${origin}"`));
     },
     credentials: true,
   })
