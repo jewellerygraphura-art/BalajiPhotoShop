@@ -18,17 +18,6 @@ import path from "path";
 import express from "express";
 import cors from "cors";
 
-app.use(
-    cors({
-        origin: [
-            "http://localhost:5173",
-            "https://g-crown-vert.vercel.app"
-        ],
-        methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-        credentials: true,
-        allowedHeaders: ["Content-Type", "Authorization"],
-    }),
-);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
