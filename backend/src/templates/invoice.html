@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BALAJI GIFT SHOP | Official Invoice</title>
+  <style>
+    :root { 
+      --primary-dark: #0a1f18; /* Dark Green from screenshot */
+      --gold: #cba135;        /* Gold from screenshot */
+      --light-bg: #fdf9f0;    /* Creamy background for table rows */
+    }
+    
+    body { background: #555; font-family: 'Times New Roman', serif; margin: 0; padding: 40px 0; }
+
+    #invoice-container {
+      width: 210mm;
+      min-height: 297mm;
+      background: white;
+      margin: 0 auto;
+      box-sizing: border-box;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* TOP HEADER BAR */
+    .dark-header {
+      background: var(--primary-dark);
+      color: var(--gold);
+      padding: 30px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand h1 { margin: 0; font-size: 38px; letter-spacing: 2px; }
+    .brand p { margin: 0; font-size: 14px; letter-spacing: 4px; opacity: 0.9; }
+    .tax-title { font-size: 32px; font-weight: normal; margin: 0; letter-spacing: 1px; }
+
+    /* CONTENT WRAPPER */
+    .invoice-body { padding: 30px 50px; flex-grow: 1; }
+
+    /* META INFO (Invoice No, Date) */
+    .meta-info { text-align: right; margin-bottom: 40px; font-size: 14px; }
+    .meta-info table { width: auto; margin-left: auto; margin-top: 0; }
+    .meta-info td { border: none; padding: 2px 5px; color: #000; font-weight: bold; }
+    .meta-info .label { color: #555; font-weight: normal; padding-right: 15px; }
+
+    /* ADDRESS DETAILS */
+    .details { display: flex; justify-content: space-between; margin-bottom: 40px; }
+    .details-box { width: 45%; }
+    .details-box h3 { 
+      color: var(--gold); 
+      font-size: 13px; 
+      border-bottom: 1px solid var(--gold); 
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+    .details-box p { margin: 3px 0; font-size: 14px; color: #333; line-height: 1.4; }
+
+    /* TABLE DESIGN */
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    thead th { 
+      background: var(--primary-dark); 
+      color: var(--gold); 
+      padding: 12px; 
+      text-align: left;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+    tbody td { 
+      padding: 15px 12px; 
+      background: var(--light-bg); 
+      border-bottom: 2px solid white;
+      font-size: 14px;
+    }
+
+    /* TOTALS SECTION */
+    .totals-area { margin-top: 20px; display: flex; justify-content: flex-end; }
+    .totals-table { width: 250px; }
+    .totals-table td { background: none; border: none; padding: 5px; text-align: right; font-size: 14px; }
+    .totals-table .label { color: #888; text-align: left; }
+    
+    .grand-total-row { background: var(--primary-dark) !important; color: var(--gold); font-weight: bold; }
+    .grand-total-row td { padding: 10px; font-size: 16px; }
+
+    /* PAYMENT INFO BOX */
+    .payment-box {
+      margin-top: 40px;
+      border: 1px solid var(--gold);
+      background: var(--light-bg);
+      padding: 15px;
+      width: 350px;
+    }
+    .payment-box h4 { margin: 0 0 10px 0; font-size: 14px; letter-spacing: 1px; color: #000; }
+    .payment-box p { margin: 2px 0; font-size: 13px; color: #444; }
+
+    /* DARK FOOTER BAR */
+    .dark-footer {
+      background: var(--primary-dark);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+    }
+    .dark-footer p { margin: 4px 0; opacity: 0.8; }
+    .dark-footer .note { font-style: italic; color: var(--gold); font-size: 11px; }
+
+    @media print {
+      body { background: white; padding: 0; }
+      #invoice-container { box-shadow: none; margin: 0; width: 100%; }
+      .dark-header, .dark-footer { -webkit-print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="invoice-container">
+    <div class="dark-header">
+      <div class="brand">
+        <h1>BALAJI</h1>
+        <p>GIFT SHOP</p>
+      </div>
+      <h2 class="tax-title">TAX INVOICE</h2>
+    </div>
+
+    <div class="invoice-body">
+      <div class="meta-info">
+        <table>
+          <tr><td class="label">Invoice No:</td><td>{{invoiceNo}}</td></tr>
+          <tr><td class="label">Order ID:</td><td>{{orderId}}</td></tr>
+          <tr><td class="label">Date:</td><td>{{invoiceDate}}</td></tr>
+        </table>
+      </div>
+
+      <div class="details">
+        <div class="details-box">
+          <h3>BILLING DETAILS</h3>
+          <p><strong>{{billingName}}</strong></p>
+          <p>{{billingAddress}}</p>
+        </div>
+        <div class="details-box">
+          <h3>SHIPPING DETAILS</h3>
+          <p><strong>{{shippingName}}</strong></p>
+          <p>{{shippingEmail}}</p>
+          <p>{{shippingAddress}}</p>
+          <p>{{shippingPhone}}</p>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>DESCRIPTION</th>
+            <th style="text-align:center">QTY</th>
+            <th style="text-align:right">RATE</th>
+            <th style="text-align:right">AMOUNT</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{productRows}}
+        </tbody>
+      </table>
+
+      <div class="totals-area">
+        <table class="totals-table">
+          <tr><td class="label">Subtotal</td><td>{{subTotal}}</td></tr>
+          <tr><td class="label">GST (3%)</td><td>{{gstAmount}}</td></tr>
+          <tr><td class="label">Shipping</td><td>{{shippingCharge}}</td></tr>
+          <tr class="grand-total-row">
+            <td style="text-align:left">Grand Total</td>
+            <td>₹{{grandTotal}}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="payment-box">
+        <h4>PAYMENT INFORMATION</h4>
+        <p>Status: {{paymentStatus}}</p>
+        <p>Method: {{paymentMethod}}</p>
+        <p>Ref No: {{paymentRef}}</p>
+      </div>
+    </div>
+
+    <div class="dark-footer">
+      <p>Thank you for choosing Balaji Gift Shop. We hope to see you again!</p>
+      <p class="note">This is a computer-generated document. No signature required.</p>
+    </div>
+  </div>
+
+</body>
+</html>

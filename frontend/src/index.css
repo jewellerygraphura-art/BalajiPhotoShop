@@ -1,0 +1,127 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
+
+@theme {
+  --font-cormorant: "Cormorant Garamond", serif;
+
+  /* Luxury Color Palette */
+  --color-brand-green: #0F241A;
+  --color-brand-gold-border: #EFDFB7;
+  --color-brand-gold-start: #B1924E;
+  --color-brand-gold-mid: #E9D392;
+}
+
+:root {
+  --base: #FFF8E8;
+  --background-green: #08221B;
+  --background-green2: #1C3A2C;
+  --golden-text: #F5E6C8;
+  --golden-text-2: #CBA135;
+  --green-text: #FAF7F2;
+  --green-text-2: #CBA135;
+
+  --font-heading: "Cormorant Garamond", serif;
+  --font-body: "Cormorant Garamond", serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.25'/%3E%3C/svg%3E");
+  opacity: 0.7;
+}
+
+/* Animations */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slideIn {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes wishlistExit {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0) rotate(0deg);
+    filter: blur(0);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+
+  40% {
+    transform: scale(1.03) translateY(-6px) rotate(-1deg);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.85) translateY(-30px) rotate(-2deg);
+    filter: blur(4px);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+.animate-wishlist-exit {
+  animation: wishlistExit 520ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes toastIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-toast-in {
+  animation: toastIn 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
