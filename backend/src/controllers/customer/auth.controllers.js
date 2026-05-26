@@ -36,7 +36,7 @@ const sendForgotPasswordOtpEmail = async (email, otpCode) => {
 
         const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
-        const senderEmail = process.env.BREVO_SENDER_EMAIL || "jewellery.graphura@gmail.com";
+        const senderEmail = process.env.BREVO_SENDER_EMAIL || process.env.ADMIN_EMAIL || "jewellery.graphura@gmail.com";
         const senderName = process.env.BREVO_SENDER_NAME || "Balaji Gift Shop";
 
         await apiInstance.sendTransacEmail({

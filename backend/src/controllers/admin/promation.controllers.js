@@ -81,7 +81,7 @@ const promation = async (req, res) => {
     await apiInstance.sendTransacEmail({
       sender: {
         name: "Balaji Gift Shop",
-        email: "jewellery.graphura@gmail.com", // MUST be verified in Brevo
+        email: process.env.BREVO_SENDER_EMAIL || process.env.ADMIN_EMAIL || "jewellery.graphura@gmail.com", // MUST be verified in Brevo
       },
       to: emails, // Brevo supports multiple recipients
       subject,

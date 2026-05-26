@@ -37,7 +37,7 @@ const subscribe = async (req, res) => {
     await apiInstance.sendTransacEmail({
       sender: {
         name: "Balaji Gift Shop",
-        email: "jewellery.graphura@gmail.com", // MUST be verified in Brevo
+        email: process.env.BREVO_SENDER_EMAIL || process.env.ADMIN_EMAIL || "jewellery.graphura@gmail.com", // MUST be verified in Brevo
       },
       to: [{ email: subscriber.email }],
       subject: "Subscription Confirmed 🎉",
