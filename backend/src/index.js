@@ -1,8 +1,12 @@
+import dotenv from "dotenv";
+dotenv.config({
+    path: "./.env",
+});
+
 import dns from "node:dns";
 dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
 import DatabaseConnection from "./configs/db.config.js";
-import dotenv from "dotenv";
 import app from "./app.js";
 import orderRoutes from "./routers/order/order.routes.js";
 import reviewRoutes from "./routers/order/review.routes.js";
@@ -28,9 +32,6 @@ app.use(
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-dotenv.config({
-    path: "./.env",
-});
 
 
 app.use("/api/orders", orderRoutes);

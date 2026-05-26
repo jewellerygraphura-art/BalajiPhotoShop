@@ -9,8 +9,6 @@ import { encryptPasswordMethod, decryptPasswordMethod } from "../../utils/passwo
 import cookiesForUser from "../../utils/cookiesForUser.js";
 import { cloudinary, deleteFromCloudinary } from "../../configs/cloudinary.js";
 
-let securitykey = process.env.securitykey
-
 const rebuildAdminContactIndex = async () => {
     try {
         await auth_Model.collection.dropIndex("contact_1");
@@ -29,7 +27,7 @@ const Signup = async (req, res) => {
     try {
         const { name, email, password, securityKey } = req.body;
 
-        if (securityKey !== securitykey) {
+        if (securityKey !== process.env.securitykey) {
             return res.status(401).json(new ApiError(401, "Incorrect Security Key."))
         }
 
@@ -127,7 +125,7 @@ const ForgotPassword = async (req, res) => {
     try {
         const { email, password, securityKey } = req.body;
 
-        if (securityKey !== securitykey) {
+        if (securityKey !== process.env.securitykey) {
             return res.status(401).json(new ApiError(401, "Incorrect Security Key."))
         }
 
